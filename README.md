@@ -1,24 +1,59 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Production Deploy - Text directions, references and code
 
-Things you may want to cover:
+Prepartion for heroku deploy:
 
-* Ruby version
+- Remove sqlite3 gem from top of application to within group :development, :test do block
 
-* System dependencies
+- Create a group production ->
 
-* Configuration
+group :production do
 
-* Database creation
+gem 'pg', '~> 0.11'
 
-* Database initialization
+end
 
-* How to run the test suite
+- Save Gemfile
 
-* Services (job queues, cache servers, search engines, etc.)
+- Run bundle install --without production to update Gemfile.lock file
 
-* Deployment instructions
+- Commit your changes to git repo ->
 
-* ...
+git add -A
+
+git commit -m "Make app production ready"
+
+wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+Check heroku:
+
+heroku -v
+
+heroku version
+
+heroku # for list of common heroku commands
+
+From your app directory:
+
+To login to your heroku account from your env ->
+
+heroku login
+
+To add your SSH key to your heroku account so you don't have to use username and password everytime ->
+
+heroku keys:add
+
+To create a new production version of your app hosted in heroku ->
+
+heroku create
+
+To push your application code to heroku (deploy your app) ->
+
+git push heroku master
+
+Ensure you have committed all your local changes to your git repo prior to pushing to heroku by checking git status
+
+To change the name of your application ->
+
+heroku rename newnameofyourapp
